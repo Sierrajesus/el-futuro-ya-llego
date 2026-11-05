@@ -1,0 +1,13 @@
+{
+  "background_color": "hsl(217, 51%, 9%)",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "SJ Conductores Inteligentes",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "SJconductores",
+  "start_url": "/",
+  "theme_color": "hsv(213, 69%, 23%)",
+  "id": "/el-futuro-ya-llego/",
+  "description": "Aplicación para conductores de delivery. Calculá tus ganancias, encontrá lugares económicos para comer y descubrí negocios cercanos."
+}
