@@ -470,10 +470,10 @@ async function publicarNegocio(){
 
     alert('¡Negocio publicado correctamente! Ya está disponible para todos.');
 
-  }catch(error){
+  catch(error){
     console.error('Error al publicar:', error);
-    alert('No se pudo publicar el negocio. Revisá la conexión o los permisos de Supabase.');
-  }
+    alert('ERROR DE SUPABASE: ' + error.message);
+}
 }
 
 // MOSTRAR NEGOCIOS
