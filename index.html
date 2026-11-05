@@ -468,9 +468,9 @@ async function publicarNegocio(){
 
     await cargarNegocios();
 
-    alert('¡Negocio publicado correctamente! Ya está disponible para todos.');
+        alert('¡Negocio publicado correctamente! Ya está disponible para todos.');
 
-  catch(error){
+  }catch(error){
     console.error('Error al publicar:', error);
     alert('ERROR DE SUPABASE: ' + error.message);
 }
