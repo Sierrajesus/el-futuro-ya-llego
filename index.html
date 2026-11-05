@@ -296,7 +296,7 @@ Una comunidad para crecer juntos.
 <script>
 // CONEXIÓN CON SUPABASE
 const SUPABASE_URL = 'https://xppqvpjvcvmvlyksyyvl.supabase.co';
-const SUPABASE_KEY = 'TU_CLAVE_PUBLICABLE';
+const SUPABASE_KEY = 'sb_publishable_aMqUFsPXxZyKC1bDXW5YYw_yMV8J8md';
 // NAVEGACIÓN
 function showPage(page){
  document.querySelectorAll('.section').forEach(s=>{
@@ -378,144 +378,184 @@ function calcularCombustible(){
   '<br>Costo por kilómetro: '+dinero(costoKm);
 }
 
-// ALMACENAMIENTO
-function obtenerNegocios(){
- try{
-  return JSON.parse(localStorage.getItem('sj_negocios')||'[]');
- }catch(e){
-  return [];
- }
+
+
+
+let negociosCompartidos = [];
+
+const SUPABASE_HEADERS = {
+  apikey: SUPABASE_KEY,
+  Authorization: 'Bearer ' + SUPABASE_KEY,
+  'Content-Type': 'application/json',
+  'Accept-Profile': 'public',
+  'Content-Profile': 'public'
+};
+
+// CARGAR NEGOCIOS DE TODOS LOS USUARIOS
+async function cargarNegocios(){
+  try{
+    const respuesta = await fetch(
+      SUPABASE_URL +
+      '/rest/v1/negocios?select=id,nombre,tipo,descripcion,localidad,direccion,telefono,publicado,creado_en&publicado=eq.true&order=creado_en.desc',
+      {
+        headers: SUPABASE_HEADERS
+      }
+    );
+
+    if(!respuesta.ok){
+      throw new Error(await respuesta.text());
+    }
+
+    negociosCompartidos = await respuesta.json();
+
+    mostrarNegocios();
+    mostrarNegociosComida();
+
+  }catch(error){
+    console.error('Error al cargar negocios:', error);
+    document.getElementById('listaNegocios').textContent =
+      'No se pudieron cargar los negocios. Revisá tu conexión.';
+    document.getElementById('listaComida').textContent =
+      'No se pudieron cargar los lugares publicados.';
+  }
 }
 
 // PUBLICAR NEGOCIO
-function publicarNegocio(){
- const nombre=document.getElementById('nombreNegocio').value.trim();
- const tipo=document.getElementById('tipoNegocio').value;
- const localidad=document.getElementById('localidadNegocio').value.trim();
- const direccion=document.getElementById('direccionNegocio').value.trim();
- const descripcion=document.getElementById('descripcionNegocio').value.trim();
- const telefono=document.getElementById('telefonoNegocio').value.trim();
+async function publicarNegocio(){
 
- if(!nombre||!localidad||!direccion||!descripcion){
-  alert('Completá nombre, localidad, dirección y descripción.');
-  return;
- }
+  const nombre = document.getElementById('nombreNegocio').value.trim();
+  const tipo = document.getElementById('tipoNegocio').value;
+  const localidad = document.getElementById('localidadNegocio').value.trim();
+  const direccion = document.getElementById('direccionNegocio').value.trim();
+  const descripcion = document.getElementById('descripcionNegocio').value.trim();
+  const telefono = document.getElementById('telefonoNegocio').value.trim();
 
- const negocios=obtenerNegocios();
+  if(!nombre || !localidad || !direccion || !descripcion){
+    alert('Completá nombre, localidad, dirección y descripción.');
+    return;
+  }
 
- negocios.push({
-  id:Date.now(),
-  nombre,tipo,localidad,direccion,descripcion,telefono
- });
+  try{
+    const respuesta = await fetch(
+      SUPABASE_URL + '/rest/v1/negocios',
+      {
+        method: 'POST',
+        headers: {
+          ...SUPABASE_HEADERS,
+          Prefer: 'return=representation'
+        },
+        body: JSON.stringify({
+          nombre,
+          tipo,
+          localidad,
+          direccion,
+          descripcion,
+          telefono,
+          publicado: true
+        })
+      }
+    );
 
- localStorage.setItem('sj_negocios',JSON.stringify(negocios));
+    if(!respuesta.ok){
+      throw new Error(await respuesta.text());
+    }
 
- document.getElementById('nombreNegocio').value='';
- document.getElementById('localidadNegocio').value='';
- document.getElementById('direccionNegocio').value='';
- document.getElementById('descripcionNegocio').value='';
- document.getElementById('telefonoNegocio').value='';
+    document.getElementById('nombreNegocio').value = '';
+    document.getElementById('localidadNegocio').value = '';
+    document.getElementById('direccionNegocio').value = '';
+    document.getElementById('descripcionNegocio').value = '';
+    document.getElementById('telefonoNegocio').value = '';
 
- mostrarNegocios();
- mostrarNegociosComida();
+    await cargarNegocios();
 
- alert('¡Negocio publicado en este dispositivo!');
+    alert('¡Negocio publicado correctamente! Ya está disponible para todos.');
+
+  }catch(error){
+    console.error('Error al publicar:', error);
+    alert('No se pudo publicar el negocio. Revisá la conexión o los permisos de Supabase.');
+  }
 }
 
 // MOSTRAR NEGOCIOS
 function mostrarNegocios(){
- const contenedor=document.getElementById('listaNegocios');
- const negocios=obtenerNegocios();
 
- contenedor.innerHTML='';
+  const contenedor = document.getElementById('listaNegocios');
+  contenedor.innerHTML = '';
 
- if(negocios.length===0){
-  contenedor.textContent='Todavía no hay negocios publicados.';
-  return;
- }
-
- negocios.slice().reverse().forEach(n=>{
-  const div=document.createElement('div');
-  div.className='business';
-
-  const titulo=document.createElement('h3');
-  titulo.textContent=n.nombre;
-
-  const detalle=document.createElement('p');
-  detalle.textContent=
-   n.localidad+' · '+n.direccion+' · '+n.tipo;
-
-  const descripcion=document.createElement('p');
-  descripcion.textContent=n.descripcion;
-
-  div.append(titulo,detalle,descripcion);
-
-  if(n.telefono){
-   const contacto=document.createElement('p');
-   contacto.textContent='Contacto: '+n.telefono;
-   div.appendChild(contacto);
+  if(negociosCompartidos.length === 0){
+    contenedor.textContent = 'Todavía no hay negocios publicados.';
+    return;
   }
 
-  const eliminar=document.createElement('button');
-  eliminar.className='action delete';
-  eliminar.textContent='Eliminar publicación';
-  eliminar.onclick=()=>eliminarNegocio(n.id);
+  negociosCompartidos.forEach(n => {
 
-  div.appendChild(eliminar);
-  contenedor.appendChild(div);
- });
-}
+    const div = document.createElement('div');
+    div.className = 'business';
 
-// ELIMINAR NEGOCIO
-function eliminarNegocio(id){
- if(!confirm('¿Querés eliminar esta publicación?'))return;
+    const titulo = document.createElement('h3');
+    titulo.textContent = n.nombre;
 
- const negocios=obtenerNegocios().filter(n=>n.id!==id);
- localStorage.setItem('sj_negocios',JSON.stringify(negocios));
+    const detalle = document.createElement('p');
+    detalle.textContent =
+      n.localidad + ' · ' + n.direccion + ' · ' + (n.tipo || '');
 
- mostrarNegocios();
- mostrarNegociosComida();
+    const descripcion = document.createElement('p');
+    descripcion.textContent = n.descripcion || '';
+
+    div.append(titulo, detalle, descripcion);
+
+    if(n.telefono){
+      const contacto = document.createElement('p');
+      contacto.textContent = 'Contacto: ' + n.telefono;
+      div.appendChild(contacto);
+    }
+
+    contenedor.appendChild(div);
+  });
 }
 
 // MOSTRAR NEGOCIOS EN COMIDA
 function mostrarNegociosComida(){
- const filtro=document.getElementById('filtroComida').value;
- const contenedor=document.getElementById('listaComida');
 
- contenedor.innerHTML='';
+  const filtro = document.getElementById('filtroComida').value;
+  const contenedor = document.getElementById('listaComida');
 
- const negocios=obtenerNegocios().filter(n=>
-  filtro==='todos'||n.tipo===filtro
- );
+  contenedor.innerHTML = '';
 
- if(negocios.length===0){
-  contenedor.textContent='Todavía no hay lugares publicados en esta categoría.';
-  return;
- }
+  const negocios = negociosCompartidos.filter(n =>
+    filtro === 'todos' || n.tipo === filtro
+  );
 
- negocios.slice().reverse().forEach(n=>{
-  const div=document.createElement('div');
-  div.className='business';
-
-  const titulo=document.createElement('h3');
-  titulo.textContent='🍽️ '+n.nombre;
-
-  const lugar=document.createElement('p');
-  lugar.textContent=n.localidad+' · '+n.direccion;
-
-  const descripcion=document.createElement('p');
-  descripcion.textContent=n.descripcion;
-
-  div.append(titulo,lugar,descripcion);
-
-  if(n.telefono){
-   const contacto=document.createElement('p');
-   contacto.textContent='Teléfono: '+n.telefono;
-   div.appendChild(contacto);
+  if(negocios.length === 0){
+    contenedor.textContent =
+      'Todavía no hay lugares publicados en esta categoría.';
+    return;
   }
 
-  contenedor.appendChild(div);
- });
+  negocios.forEach(n => {
+
+    const div = document.createElement('div');
+    div.className = 'business';
+
+    const titulo = document.createElement('h3');
+    titulo.textContent = '🍽️ ' + n.nombre;
+
+    const lugar = document.createElement('p');
+    lugar.textContent = n.localidad + ' · ' + n.direccion;
+
+    const descripcion = document.createElement('p');
+    descripcion.textContent = n.descripcion || '';
+
+    div.append(titulo, lugar, descripcion);
+
+    if(n.telefono){
+      const contacto = document.createElement('p');
+      contacto.textContent = 'Teléfono: ' + n.telefono;
+      div.appendChild(contacto);
+    }
+
+    contenedor.appendChild(div);
+  });
 }
 
 // PERFIL
@@ -549,8 +589,7 @@ function cargarPerfil(){
 // INICIAR APLICACIÓN
 function iniciar(){
  cargarPerfil();
- mostrarNegocios();
- mostrarNegociosComida();
+ cargarNegocios();
 }
 
 iniciar();
