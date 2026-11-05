@@ -1,26 +1,26 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Conductor Inteligente</title>
+<title>SJ Conductores Inteligentes</title>
+
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#0b1422;color:#f4f7fb;font-family:Arial,sans-serif}
-header{background:#12243a;padding:20px;text-align:center;border-bottom:1px solid #29415e}
-header h1{margin:0;color:#50e0d0;font-size:25px}
-header p{color:#b7c7d9;margin:8px 0 0}
-nav{display:flex;overflow-x:auto;background:#102037;padding:10px;gap:8px;position:sticky;top:0;z-index:2}
-nav button{background:#203650;color:white;border:0;padding:12px;border-radius:9px;white-space:nowrap}
+header{background:#12243a;padding:20px;text-align:center}
+header h1{color:#50e0d0;font-size:24px}
+header p{color:#b7c7d9}
+nav{display:flex;overflow-x:auto;background:#102037;padding:10px;gap:8px;position:sticky;top:0}
+nav button{background:#203650;color:white;border:0;padding:12px;border-radius:9px}
 nav button.active{background:#50e0d0;color:#071522;font-weight:bold}
 main{max-width:850px;margin:auto;padding:18px}
 section{display:none}
 section.active{display:block}
 h2{color:#50e0d0}
-.panel{background:#14263d;padding:19px;border-radius:15px;margin:14px 0;border:1px solid #2a415c}
-input,select,textarea{width:100%;padding:13px;margin:7px 0 14px;border:1px solid #405672;border-radius:9px;background:#0b192b;color:white;font-size:16px}
-label{color:#d4e1ee;font-size:14px}
+.panel{background:#14263d;padding:19px;border-radius:15px;margin:14px 0}
+input,select{width:100%;padding:13px;margin:7px 0 14px;border:1px solid #405672;border-radius:9px;background:#0b192b;color:white;font-size:16px}
+label{color:#d4e1ee}
 .btn{background:#50e0d0;color:#071522;font-weight:bold;border:0;border-radius:9px;padding:13px;width:100%;font-size:15px}
 .resultado{font-size:27px;color:#50e0d0;font-weight:bold}
 .card{background:#1b304a;padding:16px;border-radius:12px;margin:12px 0}
@@ -31,9 +31,11 @@ footer{text-align:center;color:#9aadc2;padding:30px}
 .precio{color:#50e0d0;font-weight:bold}
 </style>
 </head>
+
 <body>
+
 <header>
-<h1>🚗 CONDUCTOR INTELIGENTE</h1>
+<h1>🚗 SJ CONDUCTORES INTELIGENTES</h1>
 <p>Trabajá mejor. Gastá menos. Encontrá oportunidades.</p>
 </header>
 
@@ -45,6 +47,7 @@ footer{text-align:center;color:#9aadc2;padding:30px}
 </nav>
 
 <main>
+
 <section id="inicio" class="active">
 <div class="panel">
 <h2>¡Bienvenido!</h2>
@@ -55,52 +58,48 @@ footer{text-align:center;color:#9aadc2;padding:30px}
 </div>
 <div class="panel">
 <h2>¿Qué necesitás hoy?</h2>
-<div class="card">💰 <b>Calcular mis ganancias</b><p>Controlá tus ingresos y gastos.</p></div>
-<div class="card">🍔 <b>Encontrar comida económica</b><p>Descubrí comercios y puestos de comida.</p></div>
-<div class="card">🏪 <b>Publicar mi negocio</b><p>Ofrecé tus productos a los trabajadores.</p></div>
+<div class="card">💰 Calcular mis ganancias</div>
+<div class="card">🍔 Encontrar comida económica</div>
+<div class="card">📍 Descubrir negocios cerca de mí</div>
 </div>
 </section>
 
 <section id="ganancias">
-<h2>💰 Calculadora de ganancias</h2>
 <div class="panel">
-<label>Ingresos del día ($)</label>
+<h2>💰 Calculadora de ganancias</h2>
+<label>Ingresos del día</label>
 <input id="ingresos" type="number" placeholder="Ejemplo: 50000">
-<label>Combustible o carga ($)</label>
-<input id="combustible" type="number" placeholder="Ejemplo: 8000">
-<label>Comida ($)</label>
-<input id="comidaGasto" type="number" placeholder="Ejemplo: 4000">
-<label>Otros gastos ($)</label>
-<input id="otros" type="number" placeholder="Ejemplo: 3000">
-<button class="btn" onclick="calcular()">CALCULAR MI GANANCIA</button>
-<div class="card">
-<p>Tu ganancia neta estimada:</p>
+<label>Combustible</label>
+<input id="combustible" type="number" placeholder="Gasto en combustible">
+<label>Comida</label>
+<input id="comidaGasto" type="number" placeholder="Gasto en comida">
+<label>Otros gastos</label>
+<input id="otros" type="number" placeholder="Otros gastos">
+<button class="btn" onclick="calcular()">CALCULAR GANANCIA</button>
+<p>Tu ganancia:</p>
 <div id="resultado" class="resultado">$0</div>
-<small>Ingresos menos los gastos ingresados. Recordá incluir mantenimiento y otros costos para una estimación más completa.</small>
-</div>
 </div>
 </section>
 
 <section id="comer">
-<h2>🍔 ¿Dónde comer barato?</h2>
-<p>Buscá parrillas, comedores, rotiserías y puestos de comida.</p>
 <div class="panel">
-<label>Buscar por nombre o zona</label>
-<input id="buscar" placeholder="Ejemplo: Palermo, parrilla..." oninput="listar()">
-<label>Precio máximo ($)</label>
-<input id="maxPrecio" type="number" placeholder="Ejemplo: 8000" oninput="listar()">
-<div id="lista">
-<p>Próximamente vas a encontrar comercios de tu zona.</p>
-</div>
+<h2>🍔 Comer barato</h2>
+<p>Buscá parrillas, comedores, rotiserías y puestos de comida.</p>
+<input id="buscar" oninput="listar()" placeholder="Buscar por nombre o zona">
+<label>Precio máximo aproximado</label>
+<input id="maxPrecio" type="number" oninput="listar()" placeholder="Sin límite de precio">
+<div id="lista"></div>
 </div>
 </section>
 
 <section id="negocios">
-<h2>🏪 Publicá tu negocio</h2>
-<p>¿Tenés una parrilla, comedor, rotisería o puesto de comida? Queremos ayudarte a encontrar clientes.</p>
 <div class="panel">
+<h2>📢 Publicá tu negocio</h2>
+<p>¿Tenés una parrilla, comedor o puesto de comida? Publicalo gratis para que los conductores puedan encontrarte.</p>
+
 <label>Nombre del negocio</label>
-<input id="nombre" placeholder="Ejemplo: Parrilla de Juan">
+<input id="nombre" placeholder="Nombre de tu negocio">
+
 <label>Tipo de negocio</label>
 <select id="tipo">
 <option>Parrilla</option>
@@ -110,102 +109,167 @@ footer{text-align:center;color:#9aadc2;padding:30px}
 <option>Cafetería</option>
 <option>Otro</option>
 </select>
-<label>Qué ofrecés</label>
-<textarea id="descripcion" placeholder="Ejemplo: Choripanes, hamburguesas, menú del día"></textarea>
-<label>Precio aproximado ($)</label>
-<input id="precio" type="number" placeholder="Ejemplo: 4000">
+
+<label>Descripción</label>
+<input id="descripcion" placeholder="Qué ofrecés y qué comidas tenés">
+
+<label>Precio aproximado</label>
+<input id="precio" type="number" placeholder="Precio de una comida">
+
 <label>Dirección o zona</label>
-<input id="direccion" placeholder="Ejemplo: Palermo, Buenos Aires">
-<label>WhatsApp (con código de país)</label>
-<input id="telefono" type="tel" placeholder="Ejemplo: 54911...">
-<button class="btn" onclick="publicar()">PUBLICAR MI NEGOCIO</button>
+<input id="direccion" placeholder="Calle, localidad o barrio">
+
+<label>WhatsApp (con código de área)</label>
+<input id="telefono" placeholder="Ejemplo: 5491123456789">
+
+<button class="btn" onclick="publicar()">PUBLICAR NEGOCIO</button>
 <p id="mensaje"></p>
 </div>
 </section>
+
 </main>
 
 <footer>
-<b>CONDUCTOR INTELIGENTE</b>
-<p>Una comunidad para trabajadores y pequeños comerciantes.</p>
-<p>Proyecto en desarrollo · Argentina 🇦🇷</p>
+SJ Conductores Inteligentes · Una comunidad para trabajadores.
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+
+const SUPABASE_URL='https://xppqvpjvcvmvlyksyyvl.supabase.co';
+const SUPABASE_KEY='sb_publishable_aMqUFsPXxZyKC1bDXW5YYw_yMV8J8md';
+const supabase=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+
 function mostrar(id,boton){
 document.querySelectorAll('main section').forEach(s=>s.classList.remove('active'));
 document.getElementById(id).classList.add('active');
 document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
 boton.classList.add('active');
 }
+
 function numero(id){
 return Math.max(0,Number(document.getElementById(id).value)||0);
 }
+
 function calcular(){
-let total=numero('ingresos')-numero('combustible')-numero('comidaGasto')-numero('otros');
+const total=numero('ingresos')-numero('combustible')-numero('comidaGasto')-numero('otros');
 document.getElementById('resultado').textContent=
 new Intl.NumberFormat('es-AR',{style:'currency',currency:'ARS',maximumFractionDigits:0}).format(total);
 }
-function obtener(){
-try{return JSON.parse(localStorage.getItem('negociosCI')||'[]')}
-catch(e){return []}
-}
-function publicar(){
-let n=document.getElementById('nombre').value.trim();
-let d=document.getElementById('direccion').value.trim();
-let desc=document.getElementById('descripcion').value.trim();
-let p=Number(document.getElementById('precio').value);
-let tel=document.getElementById('telefono').value.trim();
-if(!n||!d||!desc||!p){
-document.getElementById('mensaje').textContent='Completá nombre, dirección, descripción y precio.';
+
+async function publicar(){
+const n=document.getElementById('nombre').value.trim();
+const d=document.getElementById('direccion').value.trim();
+const desc=document.getElementById('descripcion').value.trim();
+const p=Number(document.getElementById('precio').value);
+const tel=document.getElementById('telefono').value.trim();
+const categoria=document.getElementById('tipo').value;
+const mensaje=document.getElementById('mensaje');
+
+if(!n||!d||!desc||!p||p<=0){
+mensaje.textContent='Completá nombre, dirección, descripción y un precio válido.';
 return;
 }
-let negocio={
-nombre:n,tipo:document.getElementById('tipo').value,
-direccion:d,descripcion:desc,precio:p,telefono:tel
-};
-let lista=obtener();
-lista.push(negocio);
-localStorage.setItem('negociosCI',JSON.stringify(lista));
-document.getElementById('mensaje').textContent='¡Negocio guardado en este dispositivo!';
-['nombre','direccion','descripcion','precio','telefono'].forEach(id=>document.getElementById(id).value='');
+
+mensaje.textContent='Publicando...';
+
+const {error}=await supabase.from('negocios').insert({
+nombre:n,
+categoria:categoria,
+direccion:d,
+descripcion:desc,
+precio_referencial:p,
+telefono:tel,
+publicado:true
+});
+
+if(error){
+mensaje.textContent='No se pudo publicar: '+error.message;
+return;
+}
+
+mensaje.textContent='¡Negocio publicado para todos!';
+['nombre','direccion','descripcion','precio','telefono'].forEach(id=>{
+document.getElementById(id).value='';
+});
 listar();
 }
-function listar(){
-let q=(document.getElementById('buscar').value||'').toLowerCase();
-let max=Number(document.getElementById('maxPrecio').value)||Infinity;
-let lista=obtener().filter(n=>
-(n.nombre+' '+n.tipo+' '+n.direccion+' '+n.descripcion).toLowerCase().includes(q)&&n.precio<=max
+
+async function listar(){
+const q=(document.getElementById('buscar').value||'').toLowerCase();
+const max=Number(document.getElementById('maxPrecio').value)||Infinity;
+const cont=document.getElementById('lista');
+
+cont.innerHTML='<p>Buscando negocios...</p>';
+
+let consulta=supabase.from('negocios').select('*').eq('publicado',true).order('creado_en',{ascending:false});
+
+if(Number.isFinite(max)){
+consulta=consulta.lte('precio_referencial',max);
+}
+
+const {data,error}=await consulta;
+
+if(error){
+cont.innerHTML='<p>No se pudieron cargar los negocios. Revisá tu conexión.</p>';
+return;
+}
+
+const negocios=(data||[]).filter(n=>
+((n.nombre||'')+' '+(n.categoria||'')+' '+(n.direccion||'')+' '+(n.descripcion||'')).toLowerCase().includes(q)
 );
-let cont=document.getElementById('lista');
-if(!lista.length){
+
+if(!negocios.length){
 cont.innerHTML='<p>Todavía no hay negocios publicados que coincidan con tu búsqueda.</p>';
 return;
 }
+
 cont.innerHTML='';
-lista.forEach(n=>{
-let div=document.createElement('div');
+
+negocios.forEach(n=>{
+const div=document.createElement('div');
 div.className='card';
-let nombre=document.createElement('h3');nombre.textContent=n.nombre;
-let tipo=document.createElement('small');tipo.textContent=n.tipo;
-let desc=document.createElement('p');desc.textContent=n.descripcion;
-let dir=document.createElement('p');dir.textContent='📍 '+n.direccion;
-let precio=document.createElement('p');precio.className='precio';
-precio.textContent='Precio aproximado: '+new Intl.NumberFormat('es-AR',{style:'currency',currency:'ARS',maximumFractionDigits:0}).format(n.precio);
+
+const nombre=document.createElement('h3');
+nombre.textContent=n.nombre;
+
+const tipo=document.createElement('small');
+tipo.textContent=n.categoria||'';
+
+const desc=document.createElement('p');
+desc.textContent=n.descripcion||'';
+
+const dir=document.createElement('p');
+dir.textContent='📍 '+(n.direccion||'');
+
+const precio=document.createElement('p');
+precio.className='precio';
+precio.textContent='Precio aproximado: '+new Intl.NumberFormat('es-AR',{style:'currency',currency:'ARS',maximumFractionDigits:0}).format(Number(n.precio_referencial)||0);
+
 div.append(nombre,tipo,desc,dir,precio);
-let mapa=document.createElement('a');
-mapa.href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(n.direccion);
-mapa.target='_blank';mapa.rel='noopener';mapa.textContent='Ver ubicación en el mapa';
+
+const mapa=document.createElement('a');
+mapa.href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(n.direccion||'');
+mapa.target='_blank';
+mapa.rel='noopener';
+mapa.textContent='Ver ubicación en el mapa';
 div.appendChild(mapa);
+
 if(n.telefono){
-let wa=document.createElement('a');
+const wa=document.createElement('a');
 wa.href='https://wa.me/'+n.telefono.replace(/\D/g,'');
-wa.target='_blank';wa.rel='noopener';wa.textContent=' · Contactar por WhatsApp';
+wa.target='_blank';
+wa.rel='noopener';
+wa.textContent=' · Contactar por WhatsApp';
 div.appendChild(wa);
 }
+
 cont.appendChild(div);
 });
 }
+
 listar();
+
 </script>
 </body>
 </html>
