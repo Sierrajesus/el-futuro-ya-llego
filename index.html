@@ -1,118 +1,211 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="El Futuro Ya Llegó: descubrí la inteligencia artificial y la tecnología del mañana.">
-<title>EL FUTURO YA LLEGÓ</title>
+<title>Conductor Inteligente</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#07111f;color:white;font-family:Arial,sans-serif}
-header{padding:22px 7%;display:flex;justify-content:space-between;align-items:center;background:#0d1b30;border-bottom:1px solid #203958}
-.logo{font-size:22px;font-weight:bold;color:#42e8db}
-nav a{color:white;text-decoration:none;margin-left:20px;font-size:14px}
-.hero{text-align:center;padding:100px 20px;background:radial-gradient(circle at center,#164b71,#07111f 70%)}
-.hero h1{font-size:clamp(38px,7vw,75px);margin:15px 0}
-.hero h1 span{color:#42e8db}
-.hero p{color:#b9c9dc;font-size:18px;max-width:650px;margin:20px auto}
-.boton{display:inline-block;background:#42e8db;color:#07111f;padding:14px 25px;border-radius:9px;text-decoration:none;font-weight:bold;margin-top:15px}
-section{padding:65px 7%}
-h2{text-align:center;font-size:34px;margin-bottom:15px}
-.subtitulo{text-align:center;color:#aabbd0;margin-bottom:40px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
-.card{background:#10223a;padding:25px;border-radius:16px;border:1px solid #244365;transition:.3s}
-.card:hover{transform:translateY(-5px);border-color:#42e8db}
-.icono{font-size:40px}
-.card h3{color:#42e8db}
-.card p{color:#b9c9dc;line-height:1.6}
-.etiqueta{color:#42e8db;font-size:12px;font-weight:bold}
-.banner{background:linear-gradient(120deg,#104c57,#172b55);border-radius:20px;padding:45px;text-align:center}
-.banner p{color:#d0e0ef;line-height:1.7}
-footer{text-align:center;padding:35px;background:#0d1b30;color:#aabbd0}
-@media(max-width:650px){nav{display:none}.hero{padding:70px 20px}section{padding:50px 6%}}
+body{margin:0;background:#0b1422;color:#f4f7fb;font-family:Arial,sans-serif}
+header{background:#12243a;padding:20px;text-align:center;border-bottom:1px solid #29415e}
+header h1{margin:0;color:#50e0d0;font-size:25px}
+header p{color:#b7c7d9;margin:8px 0 0}
+nav{display:flex;overflow-x:auto;background:#102037;padding:10px;gap:8px;position:sticky;top:0;z-index:2}
+nav button{background:#203650;color:white;border:0;padding:12px;border-radius:9px;white-space:nowrap}
+nav button.active{background:#50e0d0;color:#071522;font-weight:bold}
+main{max-width:850px;margin:auto;padding:18px}
+section{display:none}
+section.active{display:block}
+h2{color:#50e0d0}
+.panel{background:#14263d;padding:19px;border-radius:15px;margin:14px 0;border:1px solid #2a415c}
+input,select,textarea{width:100%;padding:13px;margin:7px 0 14px;border:1px solid #405672;border-radius:9px;background:#0b192b;color:white;font-size:16px}
+label{color:#d4e1ee;font-size:14px}
+.btn{background:#50e0d0;color:#071522;font-weight:bold;border:0;border-radius:9px;padding:13px;width:100%;font-size:15px}
+.resultado{font-size:27px;color:#50e0d0;font-weight:bold}
+.card{background:#1b304a;padding:16px;border-radius:12px;margin:12px 0}
+.card p{color:#c3d0df}
+small{color:#aabbd0}
+a{color:#50e0d0}
+footer{text-align:center;color:#9aadc2;padding:30px}
+.precio{color:#50e0d0;font-weight:bold}
 </style>
 </head>
 <body>
-
 <header>
-<div class="logo">EL FUTURO YA LLEGÓ 🚀</div>
-<nav>
-<a href="#inicio">Inicio</a>
-<a href="#inteligencia">Inteligencia artificial</a>
-<a href="#tecnologia">Tecnología</a>
-<a href="#futuro">El futuro</a>
-</nav>
+<h1>🚗 CONDUCTOR INTELIGENTE</h1>
+<p>Trabajá mejor. Gastá menos. Encontrá oportunidades.</p>
 </header>
 
+<nav>
+<button class="active" onclick="mostrar('inicio',this)">Inicio</button>
+<button onclick="mostrar('ganancias',this)">Ganancias</button>
+<button onclick="mostrar('comer',this)">Comer barato</button>
+<button onclick="mostrar('negocios',this)">Publicar negocio</button>
+</nav>
+
 <main>
-<div class="hero" id="inicio">
-<div class="etiqueta">BIENVENIDOS AL MAÑANA</div>
-<h1>EL FUTURO <span>YA LLEGÓ</span></h1>
-<p>El mundo está cambiando. La inteligencia artificial, los nuevos inventos y la tecnología están transformando nuestra manera de vivir. Descubrí lo que está pasando y preparate para lo que viene.</p>
-<a class="boton" href="#inteligencia">EXPLORAR EL FUTURO</a>
+<section id="inicio" class="active">
+<div class="panel">
+<h2>¡Bienvenido!</h2>
+<p>Una plataforma creada para quienes trabajan en la calle.</p>
+<p>🛵 Repartidores de PedidosYa</p>
+<p>🚕 Conductores de Uber y Cabify</p>
+<p>🚲 Ciclistas y trabajadores independientes</p>
 </div>
+<div class="panel">
+<h2>¿Qué necesitás hoy?</h2>
+<div class="card">💰 <b>Calcular mis ganancias</b><p>Controlá tus ingresos y gastos.</p></div>
+<div class="card">🍔 <b>Encontrar comida económica</b><p>Descubrí comercios y puestos de comida.</p></div>
+<div class="card">🏪 <b>Publicar mi negocio</b><p>Ofrecé tus productos a los trabajadores.</p></div>
+</div>
+</section>
 
-<section id="inteligencia">
-<h2>Inteligencia artificial</h2>
-<p class="subtitulo">La tecnología que está revolucionando el mundo.</p>
-<div class="grid">
+<section id="ganancias">
+<h2>💰 Calculadora de ganancias</h2>
+<div class="panel">
+<label>Ingresos del día ($)</label>
+<input id="ingresos" type="number" placeholder="Ejemplo: 50000">
+<label>Combustible o carga ($)</label>
+<input id="combustible" type="number" placeholder="Ejemplo: 8000">
+<label>Comida ($)</label>
+<input id="comidaGasto" type="number" placeholder="Ejemplo: 4000">
+<label>Otros gastos ($)</label>
+<input id="otros" type="number" placeholder="Ejemplo: 3000">
+<button class="btn" onclick="calcular()">CALCULAR MI GANANCIA</button>
 <div class="card">
-<div class="icono">🤖</div>
-<h3>Asistentes inteligentes</h3>
-<p>Conocé cómo la inteligencia artificial puede ayudarte a trabajar, aprender y resolver problemas.</p>
-<div class="etiqueta">INTELIGENCIA ARTIFICIAL</div>
-</div>
-<div class="card">
-<div class="icono">🎨</div>
-<h3>Crear con IA</h3>
-<p>Descubrí cómo crear imágenes, videos, música y diseños utilizando nuevas herramientas.</p>
-<div class="etiqueta">CREATIVIDAD DIGITAL</div>
-</div>
-<div class="card">
-<div class="icono">💡</div>
-<h3>Herramientas gratuitas</h3>
-<p>Explorá aplicaciones que pueden facilitar tu vida y ayudarte a desarrollar nuevas habilidades.</p>
-<div class="etiqueta">RECURSOS DIGITALES</div>
+<p>Tu ganancia neta estimada:</p>
+<div id="resultado" class="resultado">$0</div>
+<small>Ingresos menos los gastos ingresados. Recordá incluir mantenimiento y otros costos para una estimación más completa.</small>
 </div>
 </div>
 </section>
 
-<section id="tecnologia">
-<h2>El mundo está cambiando</h2>
-<p class="subtitulo">Descubrí los avances que están transformando nuestra sociedad.</p>
-<div class="grid">
-<div class="card">
-<div class="icono">🚗</div>
-<h3>Transporte del futuro</h3>
-<p>Vehículos eléctricos, conducción autónoma y nuevas formas de movilidad.</p>
-</div>
-<div class="card">
-<div class="icono">🏥</div>
-<h3>Medicina tecnológica</h3>
-<p>Robots, inteligencia artificial y descubrimientos que ayudan a la medicina.</p>
-</div>
-<div class="card">
-<div class="icono">🌎</div>
-<h3>Un planeta conectado</h3>
-<p>Internet, satélites y tecnologías que acercan a las personas.</p>
+<section id="comer">
+<h2>🍔 ¿Dónde comer barato?</h2>
+<p>Buscá parrillas, comedores, rotiserías y puestos de comida.</p>
+<div class="panel">
+<label>Buscar por nombre o zona</label>
+<input id="buscar" placeholder="Ejemplo: Palermo, parrilla..." oninput="listar()">
+<label>Precio máximo ($)</label>
+<input id="maxPrecio" type="number" placeholder="Ejemplo: 8000" oninput="listar()">
+<div id="lista">
+<p>Próximamente vas a encontrar comercios de tu zona.</p>
 </div>
 </div>
 </section>
 
-<section id="futuro">
-<div class="banner">
-<h2>¿Estás preparado para el futuro?</h2>
-<p>La tecnología avanza todos los días. Nuestro objetivo es explicarte los cambios de manera sencilla para que puedas aprender, descubrir oportunidades y aprovechar las herramientas del mañana.</p>
-<a class="boton" href="#inicio">DESCUBRIR MÁS</a>
+<section id="negocios">
+<h2>🏪 Publicá tu negocio</h2>
+<p>¿Tenés una parrilla, comedor, rotisería o puesto de comida? Queremos ayudarte a encontrar clientes.</p>
+<div class="panel">
+<label>Nombre del negocio</label>
+<input id="nombre" placeholder="Ejemplo: Parrilla de Juan">
+<label>Tipo de negocio</label>
+<select id="tipo">
+<option>Parrilla</option>
+<option>Comedor</option>
+<option>Rotisería</option>
+<option>Puesto de comida</option>
+<option>Cafetería</option>
+<option>Otro</option>
+</select>
+<label>Qué ofrecés</label>
+<textarea id="descripcion" placeholder="Ejemplo: Choripanes, hamburguesas, menú del día"></textarea>
+<label>Precio aproximado ($)</label>
+<input id="precio" type="number" placeholder="Ejemplo: 4000">
+<label>Dirección o zona</label>
+<input id="direccion" placeholder="Ejemplo: Palermo, Buenos Aires">
+<label>WhatsApp (con código de país)</label>
+<input id="telefono" type="tel" placeholder="Ejemplo: 54911...">
+<button class="btn" onclick="publicar()">PUBLICAR MI NEGOCIO</button>
+<p id="mensaje"></p>
 </div>
 </section>
 </main>
 
 <footer>
-<strong>EL FUTURO YA LLEGÓ</strong>
-<p>Explorando hoy el mundo de mañana.</p>
-<p>© 2026 · Todos los derechos reservados.</p>
+<b>CONDUCTOR INTELIGENTE</b>
+<p>Una comunidad para trabajadores y pequeños comerciantes.</p>
+<p>Proyecto en desarrollo · Argentina 🇦🇷</p>
 </footer>
 
+<script>
+function mostrar(id,boton){
+document.querySelectorAll('main section').forEach(s=>s.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+boton.classList.add('active');
+}
+function numero(id){
+return Math.max(0,Number(document.getElementById(id).value)||0);
+}
+function calcular(){
+let total=numero('ingresos')-numero('combustible')-numero('comidaGasto')-numero('otros');
+document.getElementById('resultado').textContent=
+new Intl.NumberFormat('es-AR',{style:'currency',currency:'ARS',maximumFractionDigits:0}).format(total);
+}
+function obtener(){
+try{return JSON.parse(localStorage.getItem('negociosCI')||'[]')}
+catch(e){return []}
+}
+function publicar(){
+let n=document.getElementById('nombre').value.trim();
+let d=document.getElementById('direccion').value.trim();
+let desc=document.getElementById('descripcion').value.trim();
+let p=Number(document.getElementById('precio').value);
+let tel=document.getElementById('telefono').value.trim();
+if(!n||!d||!desc||!p){
+document.getElementById('mensaje').textContent='Completá nombre, dirección, descripción y precio.';
+return;
+}
+let negocio={
+nombre:n,tipo:document.getElementById('tipo').value,
+direccion:d,descripcion:desc,precio:p,telefono:tel
+};
+let lista=obtener();
+lista.push(negocio);
+localStorage.setItem('negociosCI',JSON.stringify(lista));
+document.getElementById('mensaje').textContent='¡Negocio guardado en este dispositivo!';
+['nombre','direccion','descripcion','precio','telefono'].forEach(id=>document.getElementById(id).value='');
+listar();
+}
+function listar(){
+let q=(document.getElementById('buscar').value||'').toLowerCase();
+let max=Number(document.getElementById('maxPrecio').value)||Infinity;
+let lista=obtener().filter(n=>
+(n.nombre+' '+n.tipo+' '+n.direccion+' '+n.descripcion).toLowerCase().includes(q)&&n.precio<=max
+);
+let cont=document.getElementById('lista');
+if(!lista.length){
+cont.innerHTML='<p>Todavía no hay negocios publicados que coincidan con tu búsqueda.</p>';
+return;
+}
+cont.innerHTML='';
+lista.forEach(n=>{
+let div=document.createElement('div');
+div.className='card';
+let nombre=document.createElement('h3');nombre.textContent=n.nombre;
+let tipo=document.createElement('small');tipo.textContent=n.tipo;
+let desc=document.createElement('p');desc.textContent=n.descripcion;
+let dir=document.createElement('p');dir.textContent='📍 '+n.direccion;
+let precio=document.createElement('p');precio.className='precio';
+precio.textContent='Precio aproximado: '+new Intl.NumberFormat('es-AR',{style:'currency',currency:'ARS',maximumFractionDigits:0}).format(n.precio);
+div.append(nombre,tipo,desc,dir,precio);
+let mapa=document.createElement('a');
+mapa.href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(n.direccion);
+mapa.target='_blank';mapa.rel='noopener';mapa.textContent='Ver ubicación en el mapa';
+div.appendChild(mapa);
+if(n.telefono){
+let wa=document.createElement('a');
+wa.href='https://wa.me/'+n.telefono.replace(/\D/g,'');
+wa.target='_blank';wa.rel='noopener';wa.textContent=' · Contactar por WhatsApp';
+div.appendChild(wa);
+}
+cont.appendChild(div);
+});
+}
+listar();
+</script>
 </body>
 </html>
