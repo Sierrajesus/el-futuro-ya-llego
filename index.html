@@ -1,4 +1,5 @@
- <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -11,8 +12,8 @@ body{margin:0;background:#0b1422;color:#f4f7fb;font-family:Arial,sans-serif}
 header{background:#12243a;padding:20px;text-align:center}
 header h1{color:#50e0d0;font-size:24px}
 header p{color:#b7c7d9}
-nav{display:flex;overflow-x:auto;background:#102037;padding:10px;gap:8px;position:sticky;top:0}
-nav button{background:#203650;color:white;border:0;padding:12px;border-radius:9px}
+nav{display:flex;overflow-x:auto;background:#102037;padding:10px;gap:8px;position:sticky;top:0;z-index:10}
+nav button{background:#203650;color:white;border:0;padding:12px;border-radius:9px;white-space:nowrap;cursor:pointer}
 nav button.active{background:#50e0d0;color:#071522;font-weight:bold}
 main{max-width:850px;margin:auto;padding:18px}
 section{display:none}
@@ -21,10 +22,11 @@ h2{color:#50e0d0}
 .panel{background:#14263d;padding:19px;border-radius:15px;margin:14px 0}
 input,select{width:100%;padding:13px;margin:7px 0 14px;border:1px solid #405672;border-radius:9px;background:#0b192b;color:white;font-size:16px}
 label{color:#d4e1ee}
-.btn{background:#50e0d0;color:#071522;font-weight:bold;border:0;border-radius:9px;padding:13px;width:100%;font-size:15px}
+.btn{background:#50e0d0;color:#071522;font-weight:bold;border:0;border-radius:9px;padding:13px;width:100%;font-size:15px;cursor:pointer}
 .resultado{font-size:27px;color:#50e0d0;font-weight:bold}
 .card{background:#1b304a;padding:16px;border-radius:12px;margin:12px 0}
 .card p{color:#c3d0df}
+.card-link{width:100%;text-align:left;color:white;border:0;cursor:pointer;font-size:16px}
 small{color:#aabbd0}
 a{color:#50e0d0}
 footer{text-align:center;color:#9aadc2;padding:30px}
@@ -56,26 +58,42 @@ footer{text-align:center;color:#9aadc2;padding:30px}
 <p>🚕 Conductores de Uber y Cabify</p>
 <p>🚲 Ciclistas y trabajadores independientes</p>
 </div>
+
 <div class="panel">
 <h2>¿Qué necesitás hoy?</h2>
-<div class="card">💰 Calcular mis ganancias</div>
-<div class="card">🍔 Encontrar comida económica</div>
-<div class="card">📍 Descubrir negocios cerca de mí</div>
+
+<button class="card card-link" onclick="mostrar('ganancias')">
+💰 Calcular mis ganancias
+</button>
+
+<button class="card card-link" onclick="mostrar('comer')">
+🍔 Encontrar comida económica
+</button>
+
+<button class="card card-link" onclick="mostrar('negocios')">
+📍 Publicar o descubrir negocios
+</button>
 </div>
 </section>
 
 <section id="ganancias">
 <div class="panel">
 <h2>💰 Calculadora de ganancias</h2>
+
 <label>Ingresos del día</label>
-<input id="ingresos" type="number" placeholder="Ejemplo: 50000">
+<input id="ingresos" type="number" min="0" placeholder="Ejemplo: 50000">
+
 <label>Combustible</label>
-<input id="combustible" type="number" placeholder="Gasto en combustible">
+<input id="combustible" type="number" min="0" placeholder="Gasto en combustible">
+
 <label>Comida</label>
-<input id="comidaGasto" type="number" placeholder="Gasto en comida">
+<input id="comidaGasto" type="number" min="0" placeholder="Gasto en comida">
+
 <label>Otros gastos</label>
-<input id="otros" type="number" placeholder="Otros gastos">
+<input id="otros" type="number" min="0" placeholder="Otros gastos">
+
 <button class="btn" onclick="calcular()">CALCULAR GANANCIA</button>
+
 <p>Tu ganancia:</p>
 <div id="resultado" class="resultado">$0</div>
 </div>
@@ -85,10 +103,15 @@ footer{text-align:center;color:#9aadc2;padding:30px}
 <div class="panel">
 <h2>🍔 Comer barato</h2>
 <p>Buscá parrillas, comedores, rotiserías y puestos de comida.</p>
+
 <input id="buscar" oninput="listar()" placeholder="Buscar por nombre o zona">
+
 <label>Precio máximo aproximado</label>
-<input id="maxPrecio" type="number" oninput="listar()" placeholder="Sin límite de precio">
-<div id="lista"></div>
+<input id="maxPrecio" type="number" min="0" oninput="listar()" placeholder="Sin límite de precio">
+
+<div id="lista">
+<p>Conectando con los negocios...</p>
+</div>
 </div>
 </section>
 
@@ -114,13 +137,13 @@ footer{text-align:center;color:#9aadc2;padding:30px}
 <input id="descripcion" placeholder="Qué ofrecés y qué comidas tenés">
 
 <label>Precio aproximado</label>
-<input id="precio" type="number" placeholder="Precio de una comida">
+<input id="precio" type="number" min="1" placeholder="Precio de una comida">
 
 <label>Dirección o zona</label>
 <input id="direccion" placeholder="Calle, localidad o barrio">
 
 <label>WhatsApp (con código de área)</label>
-<input id="telefono" placeholder="Ejemplo: 5491123456789">
+<input id="telefono" type="tel" placeholder="Ejemplo: 5491123456789">
 
 <button class="btn" onclick="publicar()">PUBLICAR NEGOCIO</button>
 <p id="mensaje"></p>
@@ -134,142 +157,232 @@ SJ Conductores Inteligentes · Una comunidad para trabajadores.
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
 
+<script>
 const SUPABASE_URL='https://xppqvpjvcvmvlyksyyvl.supabase.co';
 const SUPABASE_KEY='sb_publishable_aMqUFsPXxZyKC1bDXW5YYw_yMV8J8md';
-const supabase=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 
-function mostrar(id,boton){
-document.querySelectorAll('main section').forEach(s=>s.classList.remove('active'));
-document.getElementById(id).classList.add('active');
-document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
-boton.classList.add('active');
+let supabase=null;
+
+try{
+  if(window.supabase && window.supabase.createClient){
+    supabase=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+  }
+}catch(error){
+  console.error('Error al conectar Supabase:',error);
 }
 
+/* NAVEGACIÓN */
+function mostrar(id,boton){
+  const seccion=document.getElementById(id);
+  if(!seccion)return;
+
+  document.querySelectorAll('main section').forEach(function(s){
+    s.classList.remove('active');
+  });
+
+  seccion.classList.add('active');
+
+  document.querySelectorAll('nav button').forEach(function(b){
+    b.classList.remove('active');
+  });
+
+  if(boton && boton.closest('nav')){
+    boton.classList.add('active');
+  }else{
+    const botones=Array.from(document.querySelectorAll('nav button'));
+    const indice={inicio:0,ganancias:1,comer:2,negocios:3}[id];
+    if(indice!==undefined)botones[indice].classList.add('active');
+  }
+
+  if(id==='comer')listar();
+}
+
+/* CALCULADORA */
 function numero(id){
-return Math.max(0,Number(document.getElementById(id).value)||0);
+  return Math.max(0,Number(document.getElementById(id).value)||0);
 }
 
 function calcular(){
-const total=numero('ingresos')-numero('combustible')-numero('comidaGasto')-numero('otros');
-document.getElementById('resultado').textContent=
-new Intl.NumberFormat('es-AR',{style:'currency',currency:'ARS',maximumFractionDigits:0}).format(total);
+  const total=numero('ingresos')
+    -numero('combustible')
+    -numero('comidaGasto')
+    -numero('otros');
+
+  document.getElementById('resultado').textContent=
+    new Intl.NumberFormat('es-AR',{
+      style:'currency',
+      currency:'ARS',
+      maximumFractionDigits:0
+    }).format(total);
 }
 
+/* PUBLICAR NEGOCIO */
 async function publicar(){
-const n=document.getElementById('nombre').value.trim();
-const d=document.getElementById('direccion').value.trim();
-const desc=document.getElementById('descripcion').value.trim();
-const p=Number(document.getElementById('precio').value);
-const tel=document.getElementById('telefono').value.trim();
-const categoria=document.getElementById('tipo').value;
-const mensaje=document.getElementById('mensaje');
+  const mensaje=document.getElementById('mensaje');
 
-if(!n||!d||!desc||!p||p<=0){
-mensaje.textContent='Completá nombre, dirección, descripción y un precio válido.';
-return;
+  if(!supabase){
+    mensaje.textContent='No se pudo conectar con el servicio. Revisá tu conexión e intentá nuevamente.';
+    return;
+  }
+
+  const n=document.getElementById('nombre').value.trim();
+  const d=document.getElementById('direccion').value.trim();
+  const desc=document.getElementById('descripcion').value.trim();
+  const p=Number(document.getElementById('precio').value);
+  const tel=document.getElementById('telefono').value.trim();
+  const categoria=document.getElementById('tipo').value;
+
+  if(!n||!d||!desc||!p||p<=0){
+    mensaje.textContent='Completá nombre, dirección, descripción y un precio válido.';
+    return;
+  }
+
+  mensaje.textContent='Publicando...';
+
+  try{
+    const {error}=await supabase.from('negocios').insert({
+      nombre:n,
+      categoria:categoria,
+      direccion:d,
+      descripcion:desc,
+      precio_referencial:p,
+      telefono:tel,
+      publicado:true
+    });
+
+    if(error){
+      mensaje.textContent='No se pudo publicar: '+error.message;
+      return;
+    }
+
+    mensaje.textContent='¡Negocio publicado para todos!';
+
+    ['nombre','direccion','descripcion','precio','telefono'].forEach(function(id){
+      document.getElementById(id).value='';
+    });
+
+    listar();
+
+  }catch(error){
+    mensaje.textContent='Ocurrió un error de conexión. Intentá nuevamente.';
+    console.error(error);
+  }
 }
 
-mensaje.textContent='Publicando...';
-
-const {error}=await supabase.from('negocios').insert({
-nombre:n,
-categoria:categoria,
-direccion:d,
-descripcion:desc,
-precio_referencial:p,
-telefono:tel,
-publicado:true
-});
-
-if(error){
-mensaje.textContent='No se pudo publicar: '+error.message;
-return;
-}
-
-mensaje.textContent='¡Negocio publicado para todos!';
-['nombre','direccion','descripcion','precio','telefono'].forEach(id=>{
-document.getElementById(id).value='';
-});
-listar();
-}
-
+/* BUSCAR NEGOCIOS */
 async function listar(){
-const q=(document.getElementById('buscar').value||'').toLowerCase();
-const max=Number(document.getElementById('maxPrecio').value)||Infinity;
-const cont=document.getElementById('lista');
+  const cont=document.getElementById('lista');
+  if(!cont)return;
 
-cont.innerHTML='<p>Buscando negocios...</p>';
+  if(!supabase){
+    cont.innerHTML='<p>No se pudo conectar con el servicio de negocios. Revisá tu conexión.</p>';
+    return;
+  }
 
-let consulta=supabase.from('negocios').select('*').eq('publicado',true).order('creado_en',{ascending:false});
+  const q=(document.getElementById('buscar').value||'').toLowerCase();
+  const valorMax=document.getElementById('maxPrecio').value;
+  const max=valorMax===''?Infinity:Number(valorMax);
 
-if(Number.isFinite(max)){
-consulta=consulta.lte('precio_referencial',max);
+  cont.innerHTML='<p>Buscando negocios...</p>';
+
+  try{
+    let consulta=supabase
+      .from('negocios')
+      .select('*')
+      .eq('publicado',true)
+      .order('creado_en',{ascending:false});
+
+    if(Number.isFinite(max)){
+      consulta=consulta.lte('precio_referencial',max);
+    }
+
+    const {data,error}=await consulta;
+
+    if(error){
+      cont.innerHTML='<p>No se pudieron cargar los negocios. Revisá tu conexión.</p>';
+      console.error(error);
+      return;
+    }
+
+    const negocios=(data||[]).filter(function(n){
+      return (
+        (n.nombre||'')+' '+
+        (n.categoria||'')+' '+
+        (n.direccion||'')+' '+
+        (n.descripcion||'')
+      ).toLowerCase().includes(q);
+    });
+
+    if(!negocios.length){
+      cont.innerHTML='<p>Todavía no hay negocios publicados que coincidan con tu búsqueda.</p>';
+      return;
+    }
+
+    cont.innerHTML='';
+
+    negocios.forEach(function(n){
+      const div=document.createElement('div');
+      div.className='card';
+
+      const nombre=document.createElement('h3');
+      nombre.textContent=n.nombre;
+
+      const tipo=document.createElement('small');
+      tipo.textContent=n.categoria||'';
+
+      const desc=document.createElement('p');
+      desc.textContent=n.descripcion||'';
+
+      const dir=document.createElement('p');
+      dir.textContent='📍 '+(n.direccion||'');
+
+      const precio=document.createElement('p');
+      precio.className='precio';
+      precio.textContent='Precio aproximado: '+
+        new Intl.NumberFormat('es-AR',{
+          style:'currency',
+          currency:'ARS',
+          maximumFractionDigits:0
+        }).format(Number(n.precio_referencial)||0);
+
+      div.append(nombre,tipo,desc,dir,precio);
+
+      const mapa=document.createElement('a');
+      mapa.href='https://www.google.com/maps/search/?api=1&query='+
+        encodeURIComponent(n.direccion||'');
+      mapa.target='_blank';
+      mapa.rel='noopener';
+      mapa.textContent='Ver ubicación en el mapa';
+      div.appendChild(mapa);
+
+      if(n.telefono){
+        const wa=document.createElement('a');
+        wa.href='https://wa.me/'+n.telefono.replace(/\D/g,'');
+        wa.target='_blank';
+        wa.rel='noopener';
+        wa.textContent=' · Contactar por WhatsApp';
+        div.appendChild(wa);
+      }
+
+      cont.appendChild(div);
+    });
+
+  }catch(error){
+    cont.innerHTML='<p>Ocurrió un error al buscar negocios. Intentá nuevamente.</p>';
+    console.error(error);
+  }
 }
 
-const {data,error}=await consulta;
+/* FUNCIONES DISPONIBLES PARA LOS BOTONES */
+window.mostrar=mostrar;
+window.calcular=calcular;
+window.publicar=publicar;
+window.listar=listar;
 
-if(error){
-cont.innerHTML='<p>No se pudieron cargar los negocios. Revisá tu conexión.</p>';
-return;
-}
-
-const negocios=(data||[]).filter(n=>
-((n.nombre||'')+' '+(n.categoria||'')+' '+(n.direccion||'')+' '+(n.descripcion||'')).toLowerCase().includes(q)
-);
-
-if(!negocios.length){
-cont.innerHTML='<p>Todavía no hay negocios publicados que coincidan con tu búsqueda.</p>';
-return;
-}
-
-cont.innerHTML='';
-
-negocios.forEach(n=>{
-const div=document.createElement('div');
-div.className='card';
-
-const nombre=document.createElement('h3');
-nombre.textContent=n.nombre;
-
-const tipo=document.createElement('small');
-tipo.textContent=n.categoria||'';
-
-const desc=document.createElement('p');
-desc.textContent=n.descripcion||'';
-
-const dir=document.createElement('p');
-dir.textContent='📍 '+(n.direccion||'');
-
-const precio=document.createElement('p');
-precio.className='precio';
-precio.textContent='Precio aproximado: '+new Intl.NumberFormat('es-AR',{style:'currency',currency:'ARS',maximumFractionDigits:0}).format(Number(n.precio_referencial)||0);
-
-div.append(nombre,tipo,desc,dir,precio);
-
-const mapa=document.createElement('a');
-mapa.href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(n.direccion||'');
-mapa.target='_blank';
-mapa.rel='noopener';
-mapa.textContent='Ver ubicación en el mapa';
-div.appendChild(mapa);
-
-if(n.telefono){
-const wa=document.createElement('a');
-wa.href='https://wa.me/'+n.telefono.replace(/\D/g,'');
-wa.target='_blank';
-wa.rel='noopener';
-wa.textContent=' · Contactar por WhatsApp';
-div.appendChild(wa);
-}
-
-cont.appendChild(div);
-});
-}
-
+/* CARGA INICIAL */
 listar();
-
 </script>
+
 </body>
 </html>
