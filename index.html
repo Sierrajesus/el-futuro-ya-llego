@@ -3,39 +3,116 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="El Futuro Ya Llegó: herramientas de inteligencia artificial, tecnología y oportunidades digitales explicadas en español.">
-<title>El Futuro Ya Llegó | IA, herramientas y oportunidades</title>
+<meta name="description" content="El Futuro Ya Llegó: descubrí la inteligencia artificial y la tecnología del mañana.">
+<title>EL FUTURO YA LLEGÓ</title>
 <style>
-:root{--bg:#08111f;--panel:#101d31;--text:#f4f7fb;--muted:#aab8ca;--cyan:#48e0d0;--blue:#6d8cff;--line:#263750}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-a{color:inherit;text-decoration:none}.wrap{width:min(1120px,92%);margin:auto}
-header{position:sticky;top:0;z-index:5;background:#08111feF;border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
-nav{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:15px 0}.brand{font-weight:900;letter-spacing:-.5px}.brand span{color:var(--cyan)}.navlinks{display:flex;gap:20px;color:var(--muted);font-size:14px}
-.hero{padding:82px 0 68px;background:radial-gradient(ellipse at 80% 15%,#243d75 0,transparent 42%),radial-gradient(ellipse at 12% 70%,#07534e55 0,transparent 38%)}
-.eyebrow{display:inline-block;border:1px solid #397c7b;color:var(--cyan);padding:6px 12px;border-radius:99px;font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase}
-h1{font-size:clamp(42px,7vw,76px);line-height:1.02;letter-spacing:-3px;max-width:800px;margin:20px 0}
-h1 span{background:linear-gradient(90deg,var(--cyan),#8ba5ff);-webkit-background-clip:text;background-clip:text;color:transparent}
-.lead{max-width:650px;color:var(--muted);font-size:19px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
-.btn{display:inline-block;padding:12px 19px;border-radius:12px;font-weight:800;background:linear-gradient(100deg,var(--cyan),#8ba5ff);color:#07111e}.btn.secondary{background:transparent;color:var(--text);border:1px solid var(--line)}
-section{padding:58px 0}.section-head{max-width:680px;margin-bottom:28px}h2{font-size:clamp(28px,4vw,40px);line-height:1.15;margin:0 0 10px;letter-spacing:-1px}.muted{color:var(--muted)}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{background:linear-gradient(160deg,#14243b,#0d192b);border:1px solid var(--line);border-radius:18px;padding:22px;min-height:210px}.icon{font-size:28px}.card h3{margin:12px 0 7px}.card p{margin:0;color:var(--muted);font-size:14px}.tag{display:inline-block;margin-top:16px;color:var(--cyan);font-size:12px;font-weight:800}
-.callout{padding:28px;border-radius:20px;border:1px solid #397c7b;background:linear-gradient(110deg,#0b3b3b,#142542)}
-.callout p{color:#c4d2df;max-width:700px}.newsletter{display:flex;gap:10px;max-width:560px;margin-top:20px}.newsletter input{min-width:0;flex:1;padding:13px 14px;border-radius:10px;border:1px solid var(--line);background:#08111f;color:white}.newsletter button{border:0;border-radius:10px;padding:13px 17px;font-weight:800;background:var(--cyan);color:#07111e;cursor:pointer}
-.disclosure{font-size:12px;color:var(--muted);margin-top:12px}footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-size:13px}
-@media(max-width:760px){.navlinks{display:none}.grid{grid-template-columns:1fr}.hero{padding:62px 0 48px}h1{letter-spacing:-2px}.newsletter{flex-direction:column}}
+*{box-sizing:border-box}
+body{margin:0;background:#07111f;color:white;font-family:Arial,sans-serif}
+header{padding:22px 7%;display:flex;justify-content:space-between;align-items:center;background:#0d1b30;border-bottom:1px solid #203958}
+.logo{font-size:22px;font-weight:bold;color:#42e8db}
+nav a{color:white;text-decoration:none;margin-left:20px;font-size:14px}
+.hero{text-align:center;padding:100px 20px;background:radial-gradient(circle at center,#164b71,#07111f 70%)}
+.hero h1{font-size:clamp(38px,7vw,75px);margin:15px 0}
+.hero h1 span{color:#42e8db}
+.hero p{color:#b9c9dc;font-size:18px;max-width:650px;margin:20px auto}
+.boton{display:inline-block;background:#42e8db;color:#07111f;padding:14px 25px;border-radius:9px;text-decoration:none;font-weight:bold;margin-top:15px}
+section{padding:65px 7%}
+h2{text-align:center;font-size:34px;margin-bottom:15px}
+.subtitulo{text-align:center;color:#aabbd0;margin-bottom:40px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
+.card{background:#10223a;padding:25px;border-radius:16px;border:1px solid #244365;transition:.3s}
+.card:hover{transform:translateY(-5px);border-color:#42e8db}
+.icono{font-size:40px}
+.card h3{color:#42e8db}
+.card p{color:#b9c9dc;line-height:1.6}
+.etiqueta{color:#42e8db;font-size:12px;font-weight:bold}
+.banner{background:linear-gradient(120deg,#104c57,#172b55);border-radius:20px;padding:45px;text-align:center}
+.banner p{color:#d0e0ef;line-height:1.7}
+footer{text-align:center;padding:35px;background:#0d1b30;color:#aabbd0}
+@media(max-width:650px){nav{display:none}.hero{padding:70px 20px}section{padding:50px 6%}}
 </style>
 </head>
 <body>
-<header><div class="wrap"><nav><a class="brand" href="#">EL FUTURO <span>YA LLEGÓ</span></a><div class="navlinks"><a href="#explorar">Explorar</a><a href="#oportunidades">Oportunidades</a><a href="#novedades">Novedades</a></div></nav></div></header>
+
+<header>
+<div class="logo">EL FUTURO YA LLEGÓ 🚀</div>
+<nav>
+<a href="#inicio">Inicio</a>
+<a href="#inteligencia">Inteligencia artificial</a>
+<a href="#tecnologia">Tecnología</a>
+<a href="#futuro">El futuro</a>
+</nav>
+</header>
+
 <main>
-<section class="hero"><div class="wrap"><span class="eyebrow">Tecnología para la vida real</span><h1>Entendé el futuro.<br><span>Usalo a tu favor.</span></h1><p class="lead">Descubrí herramientas de inteligencia artificial, ideas digitales y tecnología explicadas de manera simple. Menos vueltas, más posibilidades.</p><div class="actions"><a class="btn" href="#explorar">Empezar a explorar</a><a class="btn secondary" href="#oportunidades">Ver oportunidades</a></div></div></section>
-<section id="explorar"><div class="wrap"><div class="section-head"><h2>Explorá lo que viene</h2><p class="muted">Guías prácticas para aprovechar la tecnología, incluso si estás empezando desde cero.</p></div><div class="grid">
-<article class="card"><div class="icon">🤖</div><h3>Inteligencia artificial</h3><p>Conocé herramientas de IA para escribir, diseñar, estudiar, crear contenido y ahorrar tiempo.</p><a class="tag" href="#novedades">PRÓXIMAMENTE →</a></article>
-<article class="card"><div class="icon">🧰</div><h3>Herramientas útiles</h3><p>Aplicaciones y recursos digitales seleccionados, con explicaciones claras y ejemplos.</p><a class="tag" href="#novedades">PRÓXIMAMENTE →</a></article>
-<article class="card"><div class="icon">📱</div><h3>Creación de contenido</h3><p>Ideas para mejorar videos, imágenes y publicaciones para redes sociales.</p><a class="tag" href="#novedades">PRÓXIMAMENTE →</a></article>
-</div></div></section>
-<section id="oportunidades"><div class="wrap"><div class="callout"><span class="eyebrow">Ingresos digitales</span><h2>La tecnología también puede abrir oportunidades.</h2><p>Vamos a compartir recursos, plataformas y estrategias para crear proyectos digitales. No prometemos dinero fácil: cada oportunidad se revisará con sus condiciones, costos y riesgos.</p><a class="btn" href="#novedades">Quiero recibir novedades</a></div></div></section>
-<section id="novedades"><div class="wrap"><div class="section-head"><h2>Recibí las próximas guías</h2><p class="muted">Dejá tu correo para sumarte a la lista de novedades. Esta maqueta muestra el formulario; para recibir suscripciones hay que conectarlo a un servicio de email.</p></div><form class="newsletter" onsubmit="event.preventDefault();document.getElementById('msg').textContent='¡Gracias! El formulario es una demostración: conectá un servicio de email para guardar suscripciones.';"><input type="email" required placeholder="Tu correo electrónico" aria-label="Tu correo electrónico"><button type="submit">Sumarme</button></form><p id="msg" class="disclosure" aria-live="polite"></p></div></section>
+<div class="hero" id="inicio">
+<div class="etiqueta">BIENVENIDOS AL MAÑANA</div>
+<h1>EL FUTURO <span>YA LLEGÓ</span></h1>
+<p>El mundo está cambiando. La inteligencia artificial, los nuevos inventos y la tecnología están transformando nuestra manera de vivir. Descubrí lo que está pasando y preparate para lo que viene.</p>
+<a class="boton" href="#inteligencia">EXPLORAR EL FUTURO</a>
+</div>
+
+<section id="inteligencia">
+<h2>Inteligencia artificial</h2>
+<p class="subtitulo">La tecnología que está revolucionando el mundo.</p>
+<div class="grid">
+<div class="card">
+<div class="icono">🤖</div>
+<h3>Asistentes inteligentes</h3>
+<p>Conocé cómo la inteligencia artificial puede ayudarte a trabajar, aprender y resolver problemas.</p>
+<div class="etiqueta">INTELIGENCIA ARTIFICIAL</div>
+</div>
+<div class="card">
+<div class="icono">🎨</div>
+<h3>Crear con IA</h3>
+<p>Descubrí cómo crear imágenes, videos, música y diseños utilizando nuevas herramientas.</p>
+<div class="etiqueta">CREATIVIDAD DIGITAL</div>
+</div>
+<div class="card">
+<div class="icono">💡</div>
+<h3>Herramientas gratuitas</h3>
+<p>Explorá aplicaciones que pueden facilitar tu vida y ayudarte a desarrollar nuevas habilidades.</p>
+<div class="etiqueta">RECURSOS DIGITALES</div>
+</div>
+</div>
+</section>
+
+<section id="tecnologia">
+<h2>El mundo está cambiando</h2>
+<p class="subtitulo">Descubrí los avances que están transformando nuestra sociedad.</p>
+<div class="grid">
+<div class="card">
+<div class="icono">🚗</div>
+<h3>Transporte del futuro</h3>
+<p>Vehículos eléctricos, conducción autónoma y nuevas formas de movilidad.</p>
+</div>
+<div class="card">
+<div class="icono">🏥</div>
+<h3>Medicina tecnológica</h3>
+<p>Robots, inteligencia artificial y descubrimientos que ayudan a la medicina.</p>
+</div>
+<div class="card">
+<div class="icono">🌎</div>
+<h3>Un planeta conectado</h3>
+<p>Internet, satélites y tecnologías que acercan a las personas.</p>
+</div>
+</div>
+</section>
+
+<section id="futuro">
+<div class="banner">
+<h2>¿Estás preparado para el futuro?</h2>
+<p>La tecnología avanza todos los días. Nuestro objetivo es explicarte los cambios de manera sencilla para que puedas aprender, descubrir oportunidades y aprovechar las herramientas del mañana.</p>
+<a class="boton" href="#inicio">DESCUBRIR MÁS</a>
+</div>
+</section>
 </main>
-<footer><div class="wrap"><strong>El Futuro Ya Llegó</strong><p>Contenido informativo. Antes de invertir, comprar o registrarte en una plataforma, verificá sus condiciones y reputación.</p><p>© 2026 · Todos los derechos reservados.</p></div></footer>
-</body></html>
+
+<footer>
+<strong>EL FUTURO YA LLEGÓ</strong>
+<p>Explorando hoy el mundo de mañana.</p>
+<p>© 2026 · Todos los derechos reservados.</p>
+</footer>
+
+</body>
+</html>
