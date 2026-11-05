@@ -294,7 +294,9 @@ Una comunidad para crecer juntos.
 </footer>
 
 <script>
-
+// CONEXIÓN CON SUPABASE
+const SUPABASE_URL = 'https://xppqvpjvcvmvlyksyyvl.supabase.co';
+const SUPABASE_KEY = 'TU_CLAVE_PUBLICABLE';
 // NAVEGACIÓN
 function showPage(page){
  document.querySelectorAll('.section').forEach(s=>{
@@ -552,16 +554,7 @@ function iniciar(){
 }
 
 iniciar();
-
-</script>
- const SUPABASE_URL = 'https://xppqvpjvcvmvlyksyyvl.supabase.co';
-
-const SUPABASE_KEY = 'sb_publishable_aMqUFsPXxZyKC1bDXW5YYw_yMV8J8md';
-
-const supabaseClient = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
- </script>.
+ 
+ </script>
 </body>
 </html>
