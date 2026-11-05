@@ -586,14 +586,18 @@ function cargarPerfil(){
  }catch(e){}
 }
 
-// INICIAR APLICACIÓN
-function iniciar(){
- cargarPerfil();
+// INICIAR APLICACIÓN 
+ function iniciar(){
+ try {
+  cargarPerfil();
+ } catch(error) {
+  console.error('Error al cargar perfil:', error);
+ }
+
  cargarNegocios();
 }
 
-iniciar();
- 
+document.addEventListener('DOMContentLoaded', iniciar);
  </script>
 </body>
 </html>
