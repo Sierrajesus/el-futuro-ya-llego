@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -115,7 +114,7 @@ label{font-size:14px;font-weight:bold}
 </style>
 <link rel="manifest" href="manifest.json">
 </head>
- 
+
 <body>
 
 <header>
@@ -251,7 +250,8 @@ Tu resultado aparecerá aquí.
 <label>Teléfono de contacto (opcional)</label>
 <input id="telefonoNegocio" type="tel" placeholder="Ej: 11 1234 5678">
 
-<button class="action" onclick="publicarNegocio()">Publicar negocio</button>
+<button class="action" onclick="publicarNegocio()">Enviar solicitud de publicación</button>
+<p class="small">Tu negocio será revisado antes de aparecer públicamente.</p>
 </div>
 
 <div class="card">
@@ -298,6 +298,7 @@ Una comunidad para crecer juntos.
 // CONEXIÓN CON SUPABASE
 const SUPABASE_URL = 'https://xppqvpjvcvmvlyksyyvl.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_aMqUFsPXxZyKC1bDXW5YYw_yMV8J8md';
+
 // NAVEGACIÓN
 function showPage(page){
  document.querySelectorAll('.section').forEach(s=>{
@@ -379,9 +380,6 @@ function calcularCombustible(){
   '<br>Costo por kilómetro: '+dinero(costoKm);
 }
 
-
-
-
 let negociosCompartidos = [];
 
 const SUPABASE_HEADERS = {
@@ -392,7 +390,7 @@ const SUPABASE_HEADERS = {
   'Content-Profile': 'public'
 };
 
-// CARGAR NEGOCIOS DE TODOS LOS USUARIOS
+// CARGAR NEGOCIOS APROBADOS
 async function cargarNegocios(){
   try{
     const respuesta = await fetch(
@@ -421,7 +419,7 @@ async function cargarNegocios(){
   }
 }
 
-// PUBLICAR NEGOCIO
+// ENVIAR SOLICITUD DE PUBLICACIÓN
 async function publicarNegocio(){
 
   const nombre = document.getElementById('nombreNegocio').value.trim();
@@ -452,7 +450,7 @@ async function publicarNegocio(){
           direccion,
           descripcion,
           telefono,
-          publicado: true
+          publicado: false
         })
       }
     );
@@ -467,14 +465,12 @@ async function publicarNegocio(){
     document.getElementById('descripcionNegocio').value = '';
     document.getElementById('telefonoNegocio').value = '';
 
-    await cargarNegocios();
-
-        alert('¡Negocio publicado correctamente! Ya está disponible para todos.');
+    alert('¡Solicitud recibida! Tu negocio quedó pendiente de aprobación. Cuando sea aprobado aparecerá en la aplicación.');
 
   }catch(error){
-    console.error('Error al publicar:', error);
-    alert('ERROR DE SUPABASE: ' + error.message);
-}
+    console.error('Error al enviar solicitud:', error);
+    alert('No se pudo enviar la solicitud: ' + error.message);
+  }
 }
 
 // MOSTRAR NEGOCIOS
@@ -587,8 +583,8 @@ function cargarPerfil(){
  }catch(e){}
 }
 
-// INICIAR APLICACIÓN 
- function iniciar(){
+// INICIAR APLICACIÓN
+function iniciar(){
  try {
   cargarPerfil();
  } catch(error) {
@@ -611,4 +607,4 @@ if ('serviceWorker' in navigator) {
 
 </script>
 </body>
-</html>
+ </html>
